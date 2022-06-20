@@ -1,4 +1,4 @@
-CREATE DATABASE tasksdb;
+-- CREATE DATABASE tasksdb;
 
 CREATE TABLE task(
     id SERIAL PRIMARY KEY,
