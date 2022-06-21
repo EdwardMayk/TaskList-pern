@@ -1,10 +1,15 @@
 const express = require('express')
 const morgan = require('morgan')
+const path = require('path')
 const cors = require('cors')
 
 const taskRoutes = require('./routes/task.routes')
-
 const app = express()
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(express.static(path.join(__dirname, 'client/src')))
+}
+app.use('/', express.static('./client/src'))
 
 app.use(cors())
 app.use(morgan('dev'))
