@@ -28,7 +28,7 @@ export default function TaskForm() {
     setLoading(true)
 
     if (editing) {
-      await fetch(`/tasks/${params.id}`, {
+      await fetch(`http://localhost:4000/tasks/${params.id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -36,7 +36,7 @@ export default function TaskForm() {
         body: JSON.stringify(task),
       })
     } else {
-      await fetch('/tasks', {
+      await fetch('http://localhost:4000/tasks', {
         method: 'POST',
         body: JSON.stringify(task),
         headers: { 'content-type': 'application/json' },
@@ -51,7 +51,7 @@ export default function TaskForm() {
     setTask({ ...task, [e.target.name]: e.target.value })
 
   const loadTask = async (id) => {
-    const res = await fetch(`/tasks/${id}`)
+    const res = await fetch(`http://localhost:4000/tasks/${id}`)
     const data = await res.json()
     setTask({ title: data.title, description: data.description })
     setEditing(true)

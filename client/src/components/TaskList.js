@@ -5,14 +5,14 @@ export default function TaskList() {
   const [tasks, setTasks] = useState([])
   const navigate = useNavigate()
   const loadTasks = async () => {
-    const response = await fetch('/tasks')
+    const response = await fetch('http://localhost:4000/tasks')
     const data = await response.json()
     setTasks(data)
   }
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`/tasks/${id}`, {
+      await fetch(`http://localhost:4000/tasks/${id}`, {
         method: 'DELETE',
       })
       setTasks(tasks.filter((task) => task.id !== id))
