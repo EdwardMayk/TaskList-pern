@@ -3,18 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node":"18.3.0",
+    "npm": "8.12.1"
+  },
   "scripts": {
     "start": "node src/index.js",
-    "build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "client": "cd client && npm start",
-    "lint": "eslint . --fix",
-    "dev": "nodemon src/index.js",
-    "prepare": "husky install"
+    "heroku-postbuild":"cd client && npm install && npm run build"
+    
   },
   "keywords": [],
-  "author": "",
+  "author": "mayk",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
@@ -39,5 +38,6 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  }
+  },
+  "proxy":"http://localhost:4000"
 }
