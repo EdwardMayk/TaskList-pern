@@ -28,15 +28,18 @@ export default function TaskForm() {
     setLoading(true)
 
     if (editing) {
-      await fetch(`http://localhost:4000/tasks/${params.id}`, {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      })
+      await fetch(
+        `https://pern-stack-deploy.herokuapp.com/tasks/${params.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(task),
+        }
+      )
     } else {
-      await fetch('http://localhost:4000/tasks', {
+      await fetch('https://pern-stack-deploy.herokuapp.com/tasks', {
         method: 'POST',
         body: JSON.stringify(task),
         headers: { 'content-type': 'application/json' },
@@ -51,7 +54,7 @@ export default function TaskForm() {
     setTask({ ...task, [e.target.name]: e.target.value })
 
   const loadTask = async (id) => {
-    const res = await fetch(`http://localhost:4000/tasks/${id}`)
+    const res = await fetch(`/tasks/${id}`)
     const data = await res.json()
     setTask({ title: data.title, description: data.description })
     setEditing(true)
