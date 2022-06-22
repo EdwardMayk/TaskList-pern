@@ -51,7 +51,9 @@ export default function TaskForm() {
     setTask({ ...task, [e.target.name]: e.target.value })
 
   const loadTask = async (id) => {
-    const res = await fetch(`/tasks/${id}`)
+    const res = await fetch(
+      `https://pern-stack-deploy.herokuapp.com/tasks/${id}`
+    )
     const data = await res.json()
     setTask({ title: data.title, description: data.description })
     setEditing(true)

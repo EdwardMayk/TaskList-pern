@@ -36,7 +36,7 @@ export default function TaskList() {
   return (
     <>
       <center>
-        <h1>Task List</h1>
+        <h1>Task ListS</h1>
       </center>
       {tasks.map((task) => (
         <Card
