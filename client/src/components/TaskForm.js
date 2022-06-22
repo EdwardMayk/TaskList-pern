@@ -28,7 +28,7 @@ export default function TaskForm() {
     setLoading(true)
 
     if (editing) {
-      await fetch(`https://localhost:5000/tasks/${params.id}`, {
+      await fetch(`http://localhost:5000/tasks/${params.id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -36,7 +36,7 @@ export default function TaskForm() {
         body: JSON.stringify(task),
       })
     } else {
-      await fetch('https://localhost:5000/tasks', {
+      await fetch('http://localhost:5000/tasks', {
         method: 'POST',
         body: JSON.stringify(task),
         headers: { 'content-type': 'application/json' },

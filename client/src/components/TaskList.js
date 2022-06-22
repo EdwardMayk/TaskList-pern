@@ -5,14 +5,28 @@ export default function TaskList() {
   const [tasks, setTasks] = useState({})
   const navigate = useNavigate()
   const loadTasks = async () => {
-    const response = await fetch('https://localhost:5000/tasks', {})
-    const data = await response.json()
-    setTasks(data)
+    try {
+      const response = await fetch('http://localhost:5000/tasks', {
+        mode: 'no-cors',
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+        },
+      })
+      const data = await response.json()
+      setTasks(data)
+
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`https://localhost:5000/tasks/${id}`, {
+      await fetch(`http://localhost:5000/tasks/${id}`, {
         method: 'DELETE',
       })
       setTasks(tasks.filter((task) => task.id !== id))
