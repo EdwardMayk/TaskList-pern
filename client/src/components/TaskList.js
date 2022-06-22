@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box, Card, Button, Typography, CardContent } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 export default function TaskList() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState({})
   const navigate = useNavigate()
   const loadTasks = async () => {
     const response = await fetch(
