@@ -3,7 +3,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const path = require('path')
 
-const PORT = process.env.PORT || 4000
+const port = process.env.PORT || 4000
 
 const taskRoutes = require('./routes/task.routes')
 const app = express()
@@ -32,5 +32,5 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname), 'client/build')
 })
 
-app.listen(PORT || 4000)
-console.log('Server on port 4000')
+app.listen(port)
+console.log(port)
