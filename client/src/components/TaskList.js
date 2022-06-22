@@ -1,38 +1,33 @@
-import { useEffect, useState } from 'react'
-import { Card, Button, Typography, CardContent } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+// import DeleteModal from "./DeleteModal";
 import { useNavigate } from 'react-router-dom'
-export default function TaskList() {
-  const [tasks, setTasks] = useState({})
+import { Button, Card, CardContent, Typography } from '@mui/material'
+
+const TasksList = () => {
+  const [tasks, setTasks] = useState([])
   const navigate = useNavigate()
+
   const loadTasks = async () => {
-    const response = await fetch(
-      'https://pern-stack-deploy.herokuapp.com/tasks',
-      {
-        mode: 'no-cors',
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-        },
-      }
-    )
+    const response = await fetch('http://localhost:4000/tasks')
     const data = await response.json()
     setTasks(data)
   }
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`https://pern-stack-deploy.herokuapp.com/tasks/${id}`, {
+      await fetch(`http://localhost:4000/tasks/${id}`, {
         method: 'DELETE',
       })
       setTasks(tasks.filter((task) => task.id !== id))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
   useEffect(() => {
     loadTasks()
   }, [])
+
   return (
     <>
       <center>
@@ -123,3 +118,5 @@ export default function TaskList() {
     </>
   )
 }
+
+export default TasksList

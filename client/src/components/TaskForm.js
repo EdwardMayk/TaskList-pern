@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export default function TaskForm() {
+const TaskForm = () => {
   const [task, setTask] = useState({
     title: '',
     description: '',
@@ -22,49 +22,51 @@ export default function TaskForm() {
   const navigate = useNavigate()
   const params = useParams()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    setLoading(true)
-
-    if (editing) {
-      await fetch(`https://pern-stack-deploy.herokuapp.com/${params.id}`, {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      })
-    } else {
-      await fetch('https://pern-stack-deploy.herokuapp.com/tasks', {
-        method: 'POST',
-        body: JSON.stringify(task),
-        headers: { 'content-type': 'application/json' },
-      })
-    }
-
-    setLoading(false)
-    navigate('/')
-  }
-
-  const handleChange = (e) =>
-    setTask({ ...task, [e.target.name]: e.target.value })
-
-  const loadTask = async (id) => {
-    const res = await fetch(
-      `https://pern-stack-deploy.herokuapp.com/tasks/${id}`
-    )
-    const data = await res.json()
-    setTask({ title: data.title, description: data.description })
-    setEditing(true)
-  }
-
   useEffect(() => {
     if (params.id) {
       loadTask(params.id)
     }
   }, [params.id])
 
+  const loadTask = async (id) => {
+    const res = await fetch('http://localhost:4000/tasks/' + id)
+    const data = await res.json()
+    setTask({ title: data.title, description: data.description })
+    setEditing(true)
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setLoading(true)
+    try {
+      if (editing) {
+        const response = await fetch(
+          'http://localhost:4000/tasks/' + params.id,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(task),
+          }
+        )
+        await response.json()
+      } else {
+        const response = await fetch('http://localhost:4000/tasks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(task),
+        })
+        await response.json()
+      }
+
+      setLoading(false)
+      navigate('/')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleChange = (e) =>
+    setTask({ ...task, [e.target.name]: e.target.value })
   return (
     <Grid
       container
@@ -137,3 +139,5 @@ export default function TaskForm() {
     </Grid>
   )
 }
+
+export default TaskForm
