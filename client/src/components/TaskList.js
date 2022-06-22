@@ -8,14 +8,16 @@ const TasksList = () => {
   const navigate = useNavigate()
 
   const loadTasks = async () => {
-    const response = await fetch('http://localhost:4000/tasks')
+    const response = await fetch(
+      'https://pern-stack-deploy.herokuapp.com/tasks'
+    )
     const data = await response.json()
     setTasks(data)
   }
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:4000/tasks/${id}`, {
+      await fetch(`https://pern-stack-deploy.herokuapp.com/tasks/${id}`, {
         method: 'DELETE',
       })
       setTasks(tasks.filter((task) => task.id !== id))
