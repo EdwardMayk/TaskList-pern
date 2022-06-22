@@ -5,20 +5,23 @@ export default function TaskList() {
   const [tasks, setTasks] = useState({})
   const navigate = useNavigate()
   const loadTasks = async () => {
-    const response = await fetch('http://localhost:5000/tasks', {
-      mode: 'no-cors',
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-      },
-    })
+    const response = await fetch(
+      'https://pern-stack-deploy.herokuapp.com/tasks',
+      {
+        mode: 'no-cors',
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+        },
+      }
+    )
     const data = await response.json()
     setTasks(data)
   }
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/tasks/${id}`, {
+      await fetch(`https://pern-stack-deploy.herokuapp.com/tasks/${id}`, {
         method: 'DELETE',
       })
       setTasks(tasks.filter((task) => task.id !== id))
