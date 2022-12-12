@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // import DeleteModal from "./DeleteModal";
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Typography } from '@mui/material'
+import { Button, Card, CardContent, Typography,TextareaAutosize } from '@mui/material'
 
 const TasksList = () => {
   const [tasks, setTasks] = useState([])
@@ -66,14 +66,16 @@ const TasksList = () => {
               >
                 {task.title}
               </Typography>
-              <Typography
+              <TextareaAutosize
+                aria-label="empty textarea"
                 style={{
                   color: '#3c3852',
                   fontSize: '0.86rem',
+                  width: 200,
                 }}
               >
                 {task.description}
-              </Typography>
+              </TextareaAutosize>
             </div>
 
             <div>
