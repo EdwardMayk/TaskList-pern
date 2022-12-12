@@ -55,7 +55,7 @@ const TasksList = () => {
           sx={{}}
           key={task.id}
         >
-          <CardContent style={{}}>
+          <Card style={{}}>
             <div>
               <Typography
                 style={{
