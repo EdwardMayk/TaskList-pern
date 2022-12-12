@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   CircularProgress,
+  TextareaAutosize,
 } from '@mui/material'
 
 import { useState, useEffect } from 'react'
