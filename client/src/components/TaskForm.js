@@ -108,7 +108,7 @@ const TaskForm = () => {
                 inputProps={{ style: { color: 'white' } }}
                 InputLabelProps={{ style: { color: 'white' } }}
               />
-              <TextField
+              <TextareaAutosize
                 variant="filled"
                 value={task.description}
                 sx={{ display: 'block', margin: '.5rem 0' }}
